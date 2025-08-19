@@ -15,13 +15,17 @@ class Book {
     this.isbn = isbn;
     Book.bookCount++;
   }
+
+  public static getBookCount(): number {
+    return Book.bookCount;
+  }
 }
 
 class Member {
   name: string;
   private memberId: number;
 
-  private static totalMembers: number = 0;
+  static totalMembers: number = 0;
 
   constructor(name: string, memberId: number) {
     this.name = name;
@@ -49,3 +53,23 @@ class Library {
     );
   }
 }
+// TESTING
+const book1 = new Book('Harry Potter', 'JK Rowling', 1994, 12334545);
+const book2 = new Book('Beauty and the Best', 'Walt Disney', 1973, 48590382);
+const book3 = new Book('Lion King', 'Walt Disney', 1994, 84299385);
+
+const m = new Member('Jaquavia Walker', 1);
+
+const library = new Library();
+library.addBook(book1);
+library.addBook(book2);
+library.addBook(book3);
+
+library.listBooks();
+m.borrowBook(book1);
+
+console.log('Total Books:', Book.getBookCount());
+console.log('Total Members:', Member.totalMembers);
+
+console.log(m.borrowBook(book2));
+console.log(Book.getBookCount());
