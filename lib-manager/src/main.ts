@@ -6,7 +6,7 @@ class Book {
   publishedYear: number;
   private isbn: number;
 
-  private static bookCount: number;
+  private static bookCount: number = 0;
 
   constructor(title: string, author: string, year: number, isbn: number) {
     this.title = title;
@@ -17,17 +17,11 @@ class Book {
   }
 }
 
-// 2.	Member Class
-// •	Properties: name, memberId
-// •	static totalMembers → track how many members are registered
-// •	Method:
-// •	borrowBook(book: Book) → prints a message like Alice borrowed "The Hobbit"
-
 class Member {
   name: string;
   private memberId: number;
 
-  private static totalMembers: number;
+  private static totalMembers: number = 0;
 
   constructor(name: string, memberId: number) {
     this.name = name;
@@ -37,5 +31,21 @@ class Member {
 
   borrowBook(book: Book): void {
     console.log(`${this.name} borrowed ${book.title}`);
+  }
+}
+
+class Library {
+  private books: Book[] = [];
+  private static libraryName = 'Downtown Library';
+
+  public addBook(book: Book): void {
+    this.books.push(book);
+  }
+
+  public listBooks(): void {
+    console.log(`list of books in ${Library.libraryName}`);
+    this.books.forEach((book) =>
+      console.log(`- ${book.title} by ${book.author}`)
+    );
   }
 }
